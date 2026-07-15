@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLOWCO : SMS System Requirement</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d2c54;
+            --secondary-color: #0066cc;
+            --accent-color: #00b4d8;
+            --bg-color: #f6f9fc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Sarabun', 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--primary-color);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--primary-color);
+        }
+
+        .logo-text span { color: var(--secondary-color); }
+
+        .system-badge {
+            background-color: #e2e8f0;
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-link:hover { color: var(--primary-color); }
+
+        main {
+            flex: 1;
+            max-width: 1000px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .doc-card {
+            background: var(--card-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .doc-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.3px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .doc-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .tag-category {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 4px;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            text-transform: uppercase;
+        }
+
+        .tag-date {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* สารบัญ */
+        .toc {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 28px 0 36px;
+        }
+
+        .toc h2 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            border: 0;
+            padding: 0;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toc li { margin: 3px 0; }
+        .toc-l3 { padding-left: 20px; }
+
+        .toc a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .toc a:hover { text-decoration: underline; }
+
+        h2, h3, h4, h5 {
+            color: var(--primary-color);
+            line-height: 1.4;
+            scroll-margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 21px;
+            font-weight: 700;
+            margin: 40px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 32px 0 12px;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 26px 0 10px;
+            color: var(--secondary-color);
+        }
+
+        h5 {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 22px 0 8px;
+            color: var(--text-main);
+        }
+
+        p { margin: 12px 0; }
+
+        ul, ol { margin: 12px 0 12px 22px; }
+
+        li { margin: 5px 0; }
+
+        li > ul, li > ol { margin: 5px 0 5px 18px; }
+
+        strong { color: var(--primary-color); font-weight: 600; }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.88em;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--accent-color);
+            background-color: #f0fdff;
+            padding: 12px 18px;
+            margin: 18px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        blockquote p { margin: 0; font-size: 14px; }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+            margin: 36px 0;
+        }
+
+        /* ตารางเลื่อนแนวนอนได้เมื่อจอแคบ */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 18px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary-color);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        tbody tr:last-child td { border-bottom: 0; }
+        tbody tr:hover { background-color: #f8fafc; }
+
+        footer {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 24px;
+            font-size: 13px;
+            margin-top: auto;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px;
+            }
+            main { margin: 24px auto; padding: 0 14px; }
+            .doc-card { padding: 22px 18px; }
+            .doc-title { font-size: 21px; }
+        }
+
+        @media print {
+            header, footer, .toc, .back-link { display: none; }
+            body { background: #fff; }
+            .doc-card { border: 0; box-shadow: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-container">
+            <div class="logo-text">FLOW<span>CO</span></div>
+            <div class="system-badge">ERP 2 SMS SYSTEM</div>
+        </div>
+        <a href="./index.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 11H7.83l5.44-5.43L11.85 4.15 4 12l7.85 7.85 1.42-1.42L7.83 13H19v-2z"/></svg>
+            <span>กลับหน้ารายงาน</span>
+        </a>
+    </header>
+
+    <main>
+        <article class="doc-card">
+            <div class="doc-meta">
+                <span class="tag-category">Frontend</span>
+                <span class="tag-date">2026-07-13</span>
+            </div>
+            <h1 class="doc-title">Frontend SMS — Software Requirement Specification</h1>
+            <nav class="toc" aria-label="สารบัญ">
+            <h2>สารบัญ</h2>
+            <ul>
+            <li class="toc-l2"><a href="#1-scope">1. Scope</a></li>
+            <li class="toc-l3"><a href="#1-1-ระบบงานบริการ-ซ่อมอุปกรณ์-หรือระบบงาน">1.1 ระบบงานบริการ/ซ่อมอุปกรณ์ หรือระบบงาน</a></li>
+            <li class="toc-l3"><a href="#1-2-ระบบ-fixed-asset">1.2 ระบบ Fixed Asset</a></li>
+            <li class="toc-l2"><a href="#2-target-users">2. Target Users</a></li>
+            <li class="toc-l3"><a href="#flowco-employees">Flowco employees</a></li>
+            <li class="toc-l3"><a href="#customers">Customers</a></li>
+            <li class="toc-l3"><a href="#partner-fm">Partner (FM)</a></li>
+            <li class="toc-l2"><a href="#3-software-function-specification">3. Software Function Specification</a></li>
+            <li class="toc-l3"><a href="#3-1-login-เข้าระบบ">3.1 Login เข้าระบบ</a></li>
+            <li class="toc-l3"><a href="#3-2-basic-functions">3.2 Basic Functions</a></li>
+            <li class="toc-l3"><a href="#3-3-dashboard">3.3 Dashboard</a></li>
+            <li class="toc-l3"><a href="#3-4-ระบบ-fixed-asset">3.4 ระบบ Fixed Asset</a></li>
+            </ul>
+            </nav>
+            <p>Front-end software application ที่เป็น responsive web หรือ mobile application ซึ่งเป็น sub module ของระบบ VistaERP2 สำหรับบริหารงานรับแจ้งปัญหาและซ่อมสำหรับธุรกิจจำหน่ายและติดตั้งอุปกรณ์ตู้จ่าย, หัวจ่าย, เครื่องวัดถังน้ำมัน และระบบ fuel retail system ให้กับสถานีน้ำมัน</p>
+            <hr>
+            <h2 id="1-scope">1. Scope</h2>
+            <h3 id="1-1-ระบบงานบริการ-ซ่อมอุปกรณ์-หรือระบบงาน">1.1 ระบบงานบริการ/ซ่อมอุปกรณ์ หรือระบบงาน</h3>
+            <p>จากลูกค้า หรือภายในบริษัทเอง เช่น แจ้งซ่อม, ปัญหาการอุปกรณ์ หรือการใช้งานระบบ ที่เป็นสินค้าของบริษัท รวมทั้งงานซ่อมอุปกรณ์ภายในบริษัทเอง โดยประกอบไปด้วย</p>
+            <h4 id="outstanding-job-monitor">Outstanding job monitor</h4>
+            <p>แสดงข้อมูลงานบริการ/ซ่อมที่ยังไม่ปิด ตามสิทธิ์ (Role) ของ user login</p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>กลุ่มผู้ใช้</th>
+            <th>สิทธิ์การดูข้อมูล</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>Flowco employees</td><td>สามารถดูข้อมูลได้ทั้งหมด</td></tr>
+            <tr><td>Customers</td><td>สามารถดูข้อมูลได้เฉพาะของตัวเอง (shipper, shipper_group)</td></tr>
+            <tr><td>Partner (FM)</td><td>สามารถดูข้อมูลได้เฉพาะของตัวเองตามฝ่าย (org)</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <ul>
+            <li>สามารถเปลี่ยนเงื่อนไขในการแสดงข้อมูล
+            </li>
+            <li>นำเสนอสรุปภาพรวมในมุมมองหลากหลาย
+            </li>
+            <li>แสดงรายละเอียด job ค้างทั้งหมดตามเงื่อนไข และสามารถ sort ได้
+            </li>
+            </ul>
+            <h4 id="การรับแจ้งบริการ-ซ่อม-new-job">การรับแจ้งบริการ/ซ่อม (new job)</h4>
+            <p>ทั้งการรับแจ้งและเปิด job (ticket) ในการรับแจ้งโดยฝ่าย call center เป็นผู้เปิด job โดยจะสอบถามรายละเอียด ผู้แจ้ง (ลูกค้า, พนักงานภายใน), รายละเอียดอุปกรณ์, ปัญหาที่พบ</p>
+            <p>โดยจะทำการค้นหาข้อมูลลูกค้า สัญญา ถ้ามี รวมทั้งประวัติการรับแจ้ง อุปกรณ์ที่ติดตั้งที่ลูกค้า (Fixed Asset) เพื่อทำการตรวจสอบความถูกต้อง ทั้งในเรื่องการรับประกัน และตรวจสอบว่ามีการเปิดงานซ้ำซ้อนหรือไม่ และช่าง (พนักงานบริการ) ที่รับผิดชอบ ว่างหรือไม่ ในกรณีเปิดงานซ่อมภายใน ก็จะระบุรหัสอุปกรณ์ที่ซ่อมด้วย</p>
+            <p>กรณีเป็น job PM (maintenance ประจำปี) ก็สามารถ copy job รายละเอียดเหมือนกัน แต่เปลี่ยนลูกค้า (สถานี) และผู้รับผิดชอบ พร้อมกันได้หลายสถานี</p>
+            <h4 id="การบันทึกงานบริการ-ซ่อมที่ยังไม่ปิด-edit-outstanding-job">การบันทึกงานบริการ/ซ่อมที่ยังไม่ปิด (edit outstanding job)</h4>
+            <p><strong>แก้ไขข้อมูลรับแจ้ง</strong></p>
+            <ul>
+            <li>ผู้มีสิทธิ์แก้ไขเป็นผู้ใช้ที่มี Role: call center (CDC)
+            </li>
+            <li>ลูกค้า, พนักงาน แจ้งเปลี่ยนข้อมูล, หรือบันทึกผิด เช่น อาการเสีย, สถานี, ผู้รับผิดชอบ, สัญญา
+            </li>
+            </ul>
+            <p><strong>เปลี่ยนสถานะของ job</strong> เช่น จ่ายงาน, นัดลูกค้า, เลื่อนนัด, ระหว่างเดินทาง, เข้างาน, งานค้าง, จบงาน</p>
+            <ul>
+            <li>ผู้มีสิทธิ์เปลี่ยนได้ คือ ผู้รับผิดชอบงาน (user_close), และหัวหน้างาน รวมทั้ง call center (CDC)
+            </li>
+            </ul>
+            <p><strong>บันทึกรายละเอียดการทำงาน (เข้างาน)</strong></p>
+            <ul>
+            <li>ผู้มีสิทธิ์เปลี่ยนได้ คือ ผู้รับผิดชอบงาน (user_close)
+            </li>
+            <li>ขณะผู้รับผิดชอบเข้างาน มีการบันทึกอุปกรณ์ที่ซ่อม เช่น ตู้จ่าย, หัวจ่าย และอะไหล่ที่เปลี่ยน
+            </li>
+            <li>พิมพ์ service report และให้ลูกค้าเซ็นยืนยัน เมื่อจบงานประจำวัน
+            </li>
+            </ul>
+            <h4 id="query-job-ที่ปิดงานแล้ว-แก้ไขไม่ได้">query job ที่ปิดงานแล้ว (แก้ไขไม่ได้)</h4>
+            <p>เป็นการดูข้อมูลประวัติ job ที่ปิดงานแล้ว สามารถค้นหาได้หลากหลาย ดูได้ทั้งข้อมูลการแจ้งซ่อม รายการการเข้างาน ข้อมูลอุปกรณ์ที่มีการซ่อม อะไหล่ และพิมพ์ service report ย้อนหลัง</p>
+            <blockquote><p><strong>หมายเหตุ:</strong> กรณีบันทึกข้อมูลผิด ต้องการแก้ไขข้อมูลบางจุด ยังไม่ได้สรุปเงื่อนไขหรือขั้นตอน</p></blockquote>
+            <h3 id="1-2-ระบบ-fixed-asset">1.2 ระบบ Fixed Asset</h3>
+            <p>เป็นระบบจัดเก็บข้อมูลอุปกรณ์ที่ขายให้ลูกค้า หรือที่ซ่อมให้กับลูกค้า</p>
+            <ul>
+            <li>ค้นหา scan barcode / input serial, category, brand, model, สถานะ, ลูกค้า
+            </li>
+            <li>ตรวจสอบสถานะและข้อมูลอุปกรณ์ที่ขายหรือให้บริการ
+            <ul>
+            <li>ข้อมูล: serial no, category, brand, model, warranty expired สำหรับลูกค้า และสำหรับ supplier ในการ claim, เลขที่ใบรับสินค้า (ERP)
+            </li>
+            <li>สถานะของอุปกรณ์: อยู่ในคลัง xxx, ทำ PDI, ติดตั้งที่ลูกค้า xxx, วันที่ติดตั้ง, Invoice (ERP)
+            </li>
+            <li>ประวัติการเคลื่อนย้าย: วันเวลา, รับจาก, ติดตั้งที่, หมายเหตุ
+            </li>
+            </ul>
+            </li>
+            <li>บันทึกการรับ/โอน Fixed asset ที่ยังไม่ได้ติดตั้ง
+            </li>
+            <li>เพิ่ม/แก้ไขข้อมูล Fixed Asset
+            <ul>
+            <li>การรับเข้าใหม่, การทำ PDI
+            </li>
+            <li>import excel
+            </li>
+            <li>กรณีตรวจสอบพบว่าไม่ถูกต้อง สามารถแก้ไขข้อมูลได้ และจัดเก็บรูปถ่ายของอุปกรณ์ได้
+            </li>
+            </ul>
+            </li>
+            </ul>
+            <hr>
+            <h2 id="2-target-users">2. Target Users</h2>
+            <h3 id="flowco-employees">Flowco employees</h3>
+            <p><strong>Fixed assets</strong></p>
+            <ul>
+            <li>สามารถดู
+            </li>
+            <li>แก้ไขได้ ??? ยังไม่ได้สรุปเงื่อนไข
+            </li>
+            </ul>
+            <p><strong>Role: call center (CDC)</strong></p>
+            <ul>
+            <li>รับแจ้งบริการและเปิด job ใหม่
+            </li>
+            <li>เปลี่ยนสถานะ job ได้
+            </li>
+            <li>แก้ไขข้อมูลรับแจ้งได้ แต่ไม่สามารถบันทึกรายละเอียดการเข้างาน หรืออุปกรณ์ อะไหล่ได้
+            </li>
+            </ul>
+            <p><strong>Role อื่นๆ</strong></p>
+            <ul>
+            <li>แก้ไขข้อมูลรับแจ้งไม่ได้ และแก้ไขรายละเอียดที่จบงานในแต่ละครั้งไปแล้วไม่ได้
+            </li>
+            <li>บันทึกรายละเอียดเข้างาน, อุปกรณ์ที่ซ่อม, อะไหล่ที่ใช้
+            </li>
+            </ul>
+            <h3 id="customers">Customers</h3>
+            <p>บริษัทน้ำมัน, สถานี สามารถดูข้อมูลงานซ่อมที่เป็นเจ้าของงาน — แก้ไขไม่ได้</p>
+            <h3 id="partner-fm">Partner (FM)</h3>
+            <p>partner ที่ให้ทาง Flowco รับแจ้งงานให้</p>
+            <ul>
+            <li>สามารถดูข้อมูลได้เฉพาะของตัวเองตามฝ่าย (org)
+            </li>
+            <li>แก้ไขข้อมูลรับแจ้งไม่ได้ และแก้ไขรายละเอียดที่จบงานในแต่ละครั้งไปแล้วไม่ได้
+            </li>
+            <li>บันทึกรายละเอียดเข้างาน
+            </li>
+            </ul>
+            <hr>
+            <h2 id="3-software-function-specification">3. Software Function Specification</h2>
+            <h3 id="3-1-login-เข้าระบบ">3.1 Login เข้าระบบ</h3>
+            <h4 id="ขั้นที่-1-get-uri_api-verify-user-password">ขั้นที่ 1 — get uri_api, verify user password</h4>
+            <p>แสดง:</p>
+            <ul>
+            <li>logo
+            </li>
+            <li>client_id
+            </li>
+            <li>login_id
+            </li>
+            <li>password
+            </li>
+            <li>language
+            </li>
+            <li>button: <strong>Login</strong>
+            </li>
+            </ul>
+            <h4 id="ขั้นที่-2-authorization-get-session-for-access">ขั้นที่ 2 — authorization, get session for access</h4>
+            <p>แสดง:</p>
+            <ul>
+            <li>logo
+            </li>
+            <li><code>{ad_user_name}</code>
+            </li>
+            <li><code>{ad_client_name}</code>
+            </li>
+            <li><code>{role}</code> : dropdown เพื่อเลือก role
+            </li>
+            <li><code>{org}</code> : dropdown เพื่อเลือก org
+            </li>
+            <li>button: <strong>Login2</strong>
+            </li>
+            </ul>
+            <h3 id="3-2-basic-functions">3.2 Basic Functions</h3>
+            <ul>
+            <li><strong>Display</strong>
+            <ul>
+            <li>App name, version, copyrights
+            </li>
+            <li>login information: user_name, role_name, org_name
+            </li>
+            <li>notification: read/unread
+            </li>
+            </ul>
+            </li>
+            <li>Change password
+            </li>
+            <li>Change language
+            </li>
+            <li>Help link
+            </li>
+            <li>Security: pin code, bio (mobile)
+            </li>
+            </ul>
+            <h3 id="3-3-dashboard">3.3 Dashboard</h3>
+            <h4 id="user-login-status">User login status</h4>
+            <ul>
+            <li>แสดง login name
+            </li>
+            <li>แสดงสถานะ: ว่าง, ลา, ทำงาน, N/A
+            </li>
+            <li>แสดงเลขที่ Job ที่กำลังทำงาน (Job working) กรณีทำงาน หรือมีการแจ้ง start milage เพื่องานอื่นๆ เช่น ไปไปรษณีย์ส่งของ
+            </li>
+            <li>แสดงวันเวลาเริ่มทำงาน กรณี on-site
+            </li>
+            <li>button: <strong>start Milage</strong> — process ในการเริ่มนับเวลาเริ่มต้น ในการทำเรื่องอื่นๆ เช่น ไปไปรษณีย์
+            </li>
+            <li>button: <strong>end Milage</strong> — กรณีจบงานที่กำลังทำงานอยู่ (อาจจะค้างงานไว้พรุ่งนี้หรือปิดงานก็ได้) หรือจบงานอื่นๆ เช่น ไปไปรษณีย์
+            </li>
+            </ul>
+            <h4 id="outstanding-job-monitoring">Outstanding job monitoring</h4>
+            <ul>
+            <li><strong>รับแจ้งบริการ/ซ่อม (new job)</strong> — สำหรับผู้ใช้ที่มีสิทธิ์ในการรับแจ้งซ่อม เช่น Role: call center (CDC)
+            </li>
+            <li>แสดงรายละเอียด job ที่ยังไม่ได้ปิด (outstanding job) ที่ตัวเองรับผิดชอบ (<code>user_close_id = login_id</code>) สามารถเปลี่ยนเงื่อนไขในการแสดงข้อมูล
+            </li>
+            </ul>
+            <p><strong>สรุปตาม สถานะ (job_status)</strong></p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>รหัส</th>
+            <th>สถานะ</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>01</td><td>รอจ่ายงาน</td></tr>
+            <tr><td>02</td><td>จ่ายงาน</td></tr>
+            <tr><td>03</td><td>นัดลูกค้า</td></tr>
+            <tr><td>04</td><td>ระหว่างเดินทาง</td></tr>
+            <tr><td>06</td><td>เข้างาน</td></tr>
+            <tr><td>07</td><td>งานค้าง</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <p><strong>company (client_trx)</strong></p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>รหัส</th>
+            <th>บริษัท</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>fcl</td><td>Flowco</td></tr>
+            <tr><td>sets</td><td>Sets</td></tr>
+            <tr><td>may</td><td>May flower</td></tr>
+            <tr><td>fm</td><td>FM</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <p><strong>ขอบเขตงาน (joboutside)</strong></p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>รหัส</th>
+            <th>ความหมาย</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>N</td><td>Service</td></tr>
+            <tr><td>Y</td><td>Internal</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <ul>
+            <li>ประเภทอุปกรณ์ (job category)
+            </li>
+            </ul>
+            <p><strong>SLA level</strong></p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>ระดับ</th>
+            <th>สถานะ</th>
+            <th>สี</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>1</td><td>Compliant</td><td>green</td></tr>
+            <tr><td>2</td><td>Warning</td><td>yellow</td></tr>
+            <tr><td>3</td><td>Breached</td><td>red</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <p><strong>scope data</strong> : เลือกได้อย่างใดอย่างนึง</p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>Scope</th>
+            <th>เงื่อนไข</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>My Jobs</td><td>job ที่ตัวเองรับผิดชอบ (<code>user_close_id = login_id</code>)</td></tr>
+            <tr><td>Team Jobs</td><td>ลูกน้องของตัวเองทุกระดับ (<code>supervisor_id = login_id</code>)</td></tr>
+            <tr><td>Division Jobs</td><td>ตามฝ่าย (<code>usr_org</code>)</td></tr>
+            <tr><td>Company Jobs</td><td>ตามบริษัท (<code>client_trx</code>)</td></tr>
+            <tr><td>All</td><td>all outstanding</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <p><strong>แสดงสรุปภาพรวมในมุมมองหลากหลาย</strong></p>
+            <ul>
+            <li>company, ฝ่าย (org)
+            </li>
+            <li>สถานะ (job_status)
+            </li>
+            <li>ขอบเขต (joboutside)
+            </li>
+            <li>ประเภทอุปกรณ์ (job_category)
+            </li>
+            <li>ประเภทงาน (job_worktype)
+            </li>
+            <li>brand (trade_name)
+            </li>
+            <li>SLA level: 3 level (Compliant, Warning, Breached)
+            </li>
+            </ul>
+            <p><strong>แสดงเป็น table โดยสามารถ sort ตาม header</strong></p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>คอลัมน์</th>
+            <th>field</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>Job No</td><td><code>documentno</code></td></tr>
+            <tr><td>Status</td><td><code>job_status</code></td></tr>
+            <tr><td>Company</td><td><code>client_trx</code></td></tr>
+            <tr><td>ขอบเขตงาน</td><td><code>joboutside</code></td></tr>
+            <tr><td>Org</td><td><code>usr_org</code></td></tr>
+            <tr><td>Open Date</td><td><code>opendate</code></td></tr>
+            <tr><td>Open user</td><td><code>user_open_name</code></td></tr>
+            <tr><td>VAN (ผู้รับผิดชอบ)</td><td><code>user_close_name</code></td></tr>
+            <tr><td>Priority</td><td><code>priority_name</code></td></tr>
+            <tr><td>target_rtime</td><td>Target Response Time</td></tr>
+            <tr><td>target_dtime</td><td>Target Down Time</td></tr>
+            <tr><td>Response Time</td><td>= Now() − target_rtime</td></tr>
+            <tr><td>Down Time</td><td>= Now() − Down Time</td></tr>
+            <tr><td>SLA Level</td><td>Red, Yellow, Green</td></tr>
+            <tr><td>Station</td><td><code>m_shipper_name</code></td></tr>
+            <tr><td>Brand</td><td><code>trade_name</code></td></tr>
+            <tr><td>Failure</td><td><code>failure_detail</code></td></tr>
+            </tbody>
+            </table>
+            </div>
+            <ul>
+            <li>click/tab รายการ job → change page to edit outstanding job
+            </li>
+            </ul>
+            <h4 id="รับแจ้งบริการ-ซ่อม-new-job">รับแจ้งบริการ/ซ่อม (new job)</h4>
+            <p>ขั้นตอนการรับแจ้งและเปิด job (ticket) ในการรับแจ้งโดยฝ่าย call center เป็นผู้เปิด job โดยจะสอบถามรายละเอียด ผู้แจ้ง (ลูกค้า, พนักงานภายใน), รายละเอียดอุปกรณ์, ปัญหาที่พบ</p>
+            <p>โดยจะทำการค้นหาข้อมูลลูกค้า สัญญา ถ้ามี รวมทั้งประวัติการรับแจ้ง อุปกรณ์ที่ติดตั้งที่ลูกค้า (Fixed Asset) เพื่อทำการตรวจสอบความถูกต้อง ทั้งในเรื่องการรับประกัน และตรวจสอบว่ามีการเปิดงานซ้ำซ้อนหรือไม่ และช่าง (พนักงานบริการ) ที่รับผิดชอบ ว่างหรือไม่ ในกรณีเปิดงานซ่อมภายใน ก็จะระบุรหัสอุปกรณ์ที่ซ่อมด้วย</p>
+            <p>กรณีเป็น job PM (maintenance ประจำปี) ก็สามารถ copy job รายละเอียดเหมือนกัน แต่เปลี่ยนลูกค้า (สถานี) และผู้รับผิดชอบ พร้อมกันได้หลายสถานี</p>
+            <p><strong>ข้อมูลที่ต้องบันทึกรับแจ้ง</strong></p>
+            <p><strong>company บริษัทในเครือ</strong></p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>รหัส</th>
+            <th>บริษัท</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>fcl</td><td>Flowco</td></tr>
+            <tr><td>sets</td><td>SETS</td></tr>
+            <tr><td>may</td><td>May flower</td></tr>
+            <tr><td>fm</td><td>FM (รับบริการแทน partner)</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <p><strong>ขอบข่ายงาน (joboutside) มี 3 แบบ</strong></p>
+            <ul>
+            <li><strong>Service (N)</strong> — รับแจ้งปัญหาจากลูกค้า Flowco สำหรับงานซ่อมอุปกรณ์ และงานระบบ
+            <ul>
+            <li>ประเภทอุปกรณ์ (job_category): งานตู้จ่าย/ATG/อุปกรณ์อื่นๆ (30), งานระบบ S/W (31)
+            </li>
+            </ul>
+            </li>
+            <li><strong>Internal (Y)</strong> — รับแจ้งซ่อมอุปกรณ์จากฝ่ายภายในบริษัท Flowco
+            <ul>
+            <li>ประเภทอุปกรณ์ (job_category): Recon (32), Board (33)
+            </li>
+            </ul>
+            </li>
+            </ul>
+            <p><strong>ข้อมูลผู้แจ้ง</strong></p>
+            <ul>
+            <li>ประเภทการแจ้ง: call, email, line
+            </li>
+            <li>ชื่อผู้แจ้ง, เบอร์โทร
+            </li>
+            <li>work order: เลขที่อ้างอิงของบริษัทน้ำมัน (shipper group)
+            </li>
+            <li>file แนบ กรณี email หรือมีไฟล์อ้างอิง
+            </li>
+            </ul>
+            <p><strong>ข้อมูลลูกค้า</strong></p>
+            <ul>
+            <li>สถานี (m_shipper): ค้นหาชื่อ, ที่อยู่, เบอร์โทรผู้แจ้งงาน, บริษัทน้ำมัน (shipper_group)
+            <ul>
+            <li>แสดงข้อความพิเศษที่บันทึกในข้อมูลสถานี เช่น VIP
+            </li>
+            <li>เลือกสัญญา: บริษัทน้ำมัน, สถานี, นอกสัญญา
+            </li>
+            <li>ตรวจสอบประวัติงานซ่อมย้อนหลัง: งานซ่อมประเภทเดียวกัน (job), รายละเอียดงานซ่อม (job_detail), อุปกรณ์ที่ติดตั้งที่สถานี (Fixed asset)
+            </li>
+            </ul>
+            </li>
+            <li>บริษัทน้ำมัน (shipper_group): auto จากการเลือกสัญญา
+            </li>
+            <li>ประเภทสัญญา: auto จากการเลือกสัญญา แต่สามารถแก้ไขได้ ??
+            <ul>
+            <li>สัญญาของบริษัทน้ำมัน (shipper group)
+            </li>
+            <li>สัญญาของสถานี (shipper)
+            </li>
+            <li>นอกสัญญา
+            </li>
+            </ul>
+            </li>
+            <li>charge บริษัทน้ำมัน
+            </li>
+            </ul>
+            <p><strong>ผู้รับผิดชอบงาน (user_close_id)</strong></p>
+            <ul>
+            <li>automatic จากการบันทึกสถานี (m_shipper) และประเภทอุปกรณ์ (job_category) — มีการกำหนดผู้รับผิดชอบของแต่ละสถานีและประเภทอุปกรณ์ไว้ก่อน
+            </li>
+            <li>สามารถเปลี่ยนได้ กรณีสถานะของผู้รับผิดชอบมีสถานะ "ไม่ว่าง" หรืออื่นๆ
+            </li>
+            </ul>
+            <p><strong>ประเภทงาน (job_worktype) ขึ้นกับประเภทอุปกรณ์ (job_category)</strong></p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>รหัส</th>
+            <th>ประเภทงาน</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>N2</td><td>วิเคราะห์ข้อมูล AMS</td></tr>
+            <tr><td>39</td><td>งานวิเคราะห์ ATG</td></tr>
+            <tr><td>SC</td><td>งานอบรมระบบ</td></tr>
+            <tr><td>SE</td><td>งานสำรวจสถานี</td></tr>
+            <tr><td>SP</td><td>งานทดสอบเครื่อง PDI</td></tr>
+            <tr><td>SS</td><td>งานติดตั้ง</td></tr>
+            <tr><td>AC</td><td>งานอุบัติเหตุ</td></tr>
+            <tr><td>IN</td><td>งานตรวจสอบทั่วไป</td></tr>
+            <tr><td>MS</td><td>งานตีตราต่างๆ</td></tr>
+            <tr><td>N1</td><td>Safety Audit</td></tr>
+            <tr><td>N3</td><td>งานซ่อมอุปกรณ์ ATG</td></tr>
+            <tr><td>PJ</td><td>งานโปรเจ็คต่างๆ</td></tr>
+            <tr><td>PM</td><td>งาน Preventive Work (PM)</td></tr>
+            <tr><td>R1</td><td>งาน Recondition</td></tr>
+            <tr><td>B1</td><td>งาน Board Repair</td></tr>
+            <tr><td>CO</td><td>งานผู้รับเหมา</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <p><strong>ปัญหา/อาการเสีย/การแก้ไข</strong></p>
+            <ul>
+            <li>อาการเสีย: บันทึกเป็นข้อความรายละเอียด
+            </li>
+            <li>Failure: ประเภทการปัญหา ประเมินโดยผู้รับแจ้ง (user_open)
+            </li>
+            <li>priority: คำนวณอัตโนมัติ โดยสามารถแก้ไขได้
+            </li>
+            <li>Target Response time: แสดงอัตโนมัติ
+            </li>
+            <li>Target Down time: แสดงอัตโนมัติ
+            </li>
+            </ul>
+            <p><strong>บันทึกข้อมูล job</strong></p>
+            <p>แจ้งเตือนให้ทำการ "ตรวจสอบประวัติงานซ่อมย้อนหลัง" กรณีที่ยังไม่มีการตรวจสอบในขั้นตอนการบันทึก</p>
+            <p>สถานะ (status):</p>
+            <ul>
+            <li>รอจ่ายงาน (01) — กรณีไม่ได้บันทึกผู้รับผิดชอบ (user_close)
+            </li>
+            <li>จ่ายงาน (02) — กรณีบันทึกผู้รับผิดชอบ (user_close)
+            </li>
+            </ul>
+            <p>บันทึกข้อมูลและแสดงข้อมูล:</p>
+            <ul>
+            <li>หมายเลข job = auto
+            </li>
+            <li>ผู้รับแจ้ง (user_open) = login_id
+            </li>
+            <li>วันเวลาที่เปิด (opendate) = เวลาที่บันทึก
+            </li>
+            <li>สถานี, ประเภทสัญญา, ที่อยู่
+            </li>
+            <li>อาการเสีย
+            </li>
+            <li>Target Response time, Target Down time
+            </li>
+            </ul>
+            <p><strong>copy job</strong></p>
+            <p>เปิดงานสถานีเพิ่มเติมได้หลายสถานีพร้อมกัน โดยใช้ข้อมูล job เดิม แต่ให้เลือกสถานีได้</p>
+            <ul>
+            <li>ค้นหาสถานีที่ต้องการเปิด โดยค้นหาจาก รหัส, ชื่อ, ที่อยู่, บริษัทน้ำมัน (shipper group)
+            <ul>
+            <li>แสดงข้อมูลสถานี และผู้รับผิดชอบให้เลือก สามารถแก้ไขผู้รับผิดชอบในขณะที่เลือกได้
+            </li>
+            </ul>
+            </li>
+            <li>เลือกได้หลายสถานีพร้อมกัน
+            </li>
+            <li>ทำการบันทึก job ใหม่ โดยใช้รายละเอียด job ต้นฉบับ แค่เปลี่ยนสถานี, บริษัทน้ำมัน, และผู้รับผิดชอบ
+            </li>
+            </ul>
+            <h4 id="การบันทึกงานบริการ-ซ่อมที่ยังไม่ปิด-edit-outstanding-job-2">การบันทึกงานบริการ/ซ่อมที่ยังไม่ปิด (edit outstanding job)</h4>
+            <p>เมื่อมีการเลือกรายการจากหน้า Dashboard ระบบจะแสดงข้อมูลดังนี้</p>
+            <p><strong>ข้อมูลรับแจ้งบริการ/ซ่อม</strong></p>
+            <p>ผู้มีสิทธิ์แก้ไขเป็นผู้ใช้ที่มี Role: call center (CDC) ข้อมูลที่ไม่สามารถแก้ไขได้ คือ เลขที่ job, วันเวลาเปิด, ผู้รับแจ้ง, etc</p>
+            <p><strong>ข้อมูล job (j_job)</strong></p>
+            <ul>
+            <li>เลขที่ job, วันเวลาที่เปิด (opendate), ผู้รับแจ้ง (user_open)
+            </li>
+            <li>company บริษัทในเครือ, ฝ่าย (usr_org), job อ้างอิง, ใบเสนอราคาอ้างอิง
+            </li>
+            <li>ขอบข่ายงาน (joboutside), ประเภทอุปกรณ์ (job_category), ประเภทงาน (job_worktype)
+            </li>
+            </ul>
+            <p><strong>สถานะ job</strong></p>
+            <p>ผู้มีสิทธิ์เปลี่ยนได้ คือ ผู้รับผิดชอบงาน (user_close), และหัวหน้างาน รวมทั้ง call center (CDC)</p>
+            <p>ข้อมูลในการเปลี่ยนสถานะ จะมีการบันทึกเวลาปิด (stop) ของสถานะปัจจุบันก่อน และบันทึกเวลาเปิด (start) ของสถานะใหม่ และหมายเหตุเพิ่มเติม</p>
+            <div class="table-wrap">
+            <table>
+            <thead><tr>
+            <th>รหัส</th>
+            <th>สถานะ</th>
+            <th>เงื่อนไขการเปลี่ยน</th>
+            </tr></thead>
+            <tbody>
+            <tr><td>01</td><td>รอจ่ายงาน</td><td>ไม่สามารถเปลี่ยนเป็น "รอจ่ายงาน" ได้ — เกิดขึ้นอัตโนมัติเมื่อเปิด job ใหม่และไม่ได้ใส่ผู้รับผิดชอบ (user_close)</td></tr>
+            <tr><td>02</td><td>จ่ายงาน</td><td>เปลี่ยนได้ก็ต่อเมื่อสถานะปัจจุบันเป็น "รอจ่ายงาน"</td></tr>
+            <tr><td>03</td><td>นัดลูกค้า</td><td>เปลี่ยนได้ก็ต่อเมื่อสถานะปัจจุบันเป็น "จ่ายงาน", "นัดลูกค้า", "งานค้าง" — บันทึกข้อมูลการนัดเพิ่มเติม: ชื่อผู้ติดต่อ, เบอร์โทร, วันเวลาที่นัด</td></tr>
+            <tr><td>04</td><td>ระหว่างเดินทาง</td><td>เปลี่ยนได้ก็ต่อเมื่อสถานะปัจจุบันเป็น "นัดลูกค้า"</td></tr>
+            <tr><td>06</td><td>เข้างาน</td><td>เปลี่ยนได้ก็ต่อเมื่อสถานะปัจจุบันเป็น "ระหว่างเดินทาง" แต่ถ้าสถานะเป็น "จ่ายงาน", "งานค้าง" จะเปลี่ยนได้ก็ต่อเมื่อผู้รับผิดชอบ (user_close) ถูก set ว่าไม่ต้อง onsite</td></tr>
+            <tr><td>07</td><td>งานค้าง</td><td>เปลี่ยนได้ก็ต่อเมื่อสถานะปัจจุบันเป็น "เข้างาน" และมีการบันทึกข้อมูลการ "จบงาน"</td></tr>
+            <tr><td>99</td><td>ปิดงาน</td><td>เปลี่ยนได้ก็ต่อเมื่อสถานะปัจจุบันเป็น "เข้างาน" และมีการบันทึกข้อมูลการ "จบงาน"</td></tr>
+            </tbody>
+            </table>
+            </div>
+            <p><strong>ข้อมูลผู้แจ้ง</strong></p>
+            <ul>
+            <li>ประเภทการแจ้ง: call, email, line
+            </li>
+            <li>ชื่อผู้แจ้ง, เบอร์โทร
+            </li>
+            <li>work order: เลขที่อ้างอิงของบริษัทน้ำมัน (shipper group)
+            </li>
+            <li>file แนบ กรณี email หรือมีไฟล์อ้างอิง
+            </li>
+            </ul>
+            <p><strong>ข้อมูลลูกค้า</strong></p>
+            <ul>
+            <li>รหัส/ชื่อสถานี (m_shipper), ที่อยู่, เบอร์โทร, บริษัทน้ำมัน (shipper_group)
+            </li>
+            <li>ประเภทสัญญา, เลขที่สัญญา, แสดงข้อความพิเศษที่บันทึกในข้อมูลสถานี เช่น VIP
+            </li>
+            <li>charge บริษัทน้ำมัน
+            </li>
+            </ul>
+            <p><strong>ปัญหา/อาการเสีย/การแก้ไข</strong></p>
+            <ul>
+            <li>อาการเสีย, ประเภทการปัญหา (Failure), priority
+            </li>
+            <li>Target Response time, Response time
+            </li>
+            <li>Target Down time, Down time
+            </li>
+            <li>SLA Level (red, yellow, green)
+            </li>
+            </ul>
+            <p><strong>พิมพ์รายงานและแบบฟอร์ม</strong></p>
+            <ul>
+            <li>ใบเสนอราคา
+            </li>
+            <li>แบบฟอร์มเอกสาร safety ให้ลูกค้ากรอก
+            </li>
+            <li>service report
+            </li>
+            </ul>
+            <h5 id="บันทึกรายละเอียดการทำงาน">บันทึกรายละเอียดการทำงาน</h5>
+            <p>ผู้มีสิทธิ์เปลี่ยนได้ คือ ผู้รับผิดชอบงาน (user_close) และสถานะต้องเป็น "เข้างาน"</p>
+            <p>ข้อมูลที่แสดงมี 3 ส่วน:</p>
+            <ol>
+            <li><strong>ประวัติการเปลี่ยนสถานะ (job_detail)</strong> โดยเรียงลำดับจากเวลาล่าสุด
+            <ul>
+            <li>วันเวลาเริ่ม, สิ้นสุด, ผู้เข้างาน, รายละเอียดการแก้ไข, สถานะ
+            </li>
+            </ul>
+            </li>
+            <li><strong>อุปกรณ์ที่ซ่อม (j_jobdetail_asset)</strong>
+            <ul>
+            <li>แสดงรายการอุปกรณ์ที่ซ่อม / และบันทึกใหม่: serial no, new serial (กรณีเปลี่ยนอุปกรณ์), รูปก่อนซ่อม, รูปหลังซ่อม
+            </li>
+            <li>ประเภทอุปกรณ์ของ Fixed asset, brand, model, ตำแหน่ง, จุดเสีย
+            </li>
+            <li>failure code, อาการเสีย, การแก้ไข
+            </li>
+            <li>*** กรณีอุปกรณ์เป็นตู้จ่าย, หัวจ่าย มีการบันทึกชนิดน้ำมัน, มิเตอร์ก่อน, หลังซ่อม
+            </li>
+            <li>*** failure code ขึ้นอยู่กับประเภทอุปกรณ์
+            </li>
+            <li>*** อุปกรณ์ที่ซ่อมไปแล้วตามสถานะ (job_detail) ที่ปิดไปแล้ว จะแก้ไขไม่ได้
+            </li>
+            <li>*** check serial no ว่าตรงกับฐานข้อมูลหรือไม่
+            </li>
+            </ul>
+            </li>
+            <li><strong>อะไหล่ที่ใช้ไป (j_jobdetail_spare)</strong>
+            <ul>
+            <li>แสดงรายการอะไหล่ที่ใช้ไป ค้นหาอะไหล่, ดูสต็อกคงเหลือได้
+            </li>
+            <li>บันทึกจำนวน, ราคา (อัตโนมัติ), ประเภทอะไหล่อัตโนมัติ (IN: คิดเงิน, CS: ไม่คิดเงิน, IS: หมุนเวียน, WA: ประกัน)
+            </li>
+            <li>charge สถานี
+            </li>
+            <li>*** อุปกรณ์ที่ซ่อมไปแล้วตามสถานะ (job_detail) ที่ปิดไปแล้ว จะแก้ไขไม่ได้
+            </li>
+            </ul>
+            </li>
+            </ol>
+            <h5 id="บันทึกข้อมูลการ-จบงาน">บันทึกข้อมูลการ "จบงาน"</h5>
+            <p>ผู้มีสิทธิ์เปลี่ยนได้ คือ ผู้รับผิดชอบงาน (user_close), และหัวหน้างาน รวมทั้ง call center (CDC) และสถานะต้องเป็น "เข้างาน" หรือสถานะอื่นที่ไม่ใช่ "ปิดงาน" — "เข้างาน" call center (CDC) สามารถปิดงานได้</p>
+            <p>ก่อนจบงานด้วยสถานะ "งานค้าง" หรือ "ปิดงาน" ต้องสรุปรายละเอียดให้ลูกค้ายืนยันทางหน้าจอ หรือพิมพ์ service report ให้ลูกค้ายืนยัน:</p>
+            <ul>
+            <li>อาการเสีย, การแก้ไข
+            </li>
+            <li>รายการอุปกรณ์ที่ซ่อม และอะไหล่ที่ใช้
+            </li>
+            <li>ค่าใช้จ่ายที่จ่ายเพิ่ม
+            </li>
+            <li>บันทึกข้อมูลการชำระเงิน — แสดง QR payment ให้ลูกค้าสแกน ถ้าชำระเงินผ่านการโอน
+            </li>
+            <li>ประเมินความพึงพอใจ
+            </li>
+            <li>ลูกค้าเซ็น e-signature เพื่อยืนยัน
+            </li>
+            </ul>
+            <p>ยืนยันการปิดงาน "งานค้าง", "ปิดงาน"</p>
+            <h4 id="query-job-ที่ปิดงานแล้ว-แก้ไขไม่ได้-2">query job ที่ปิดงานแล้ว (แก้ไขไม่ได้)</h4>
+            <p>ค้นหา job no, company, ผู้รับผิดชอบ, ผู้รับแจ้ง, วันเวลาเปิด job, วันเวลาปิด job, สถานี, บริษัทน้ำมัน, ประเภทสัญญา, การชำระ เป็นต้น</p>
+            <p>แสดงข้อมูลเหมือนกับ monitor:</p>
+            <ul>
+            <li>ข้อมูลการแจ้งบริการ/ซ่อม: <code>j_job</code>
+            </li>
+            <li>ข้อมูลการเข้างานแต่ละครั้ง: <code>j_jobdetail</code>
+            </li>
+            <li>ข้อมูลอุปกรณ์ที่ทำการซ่อม: <code>j_jobdetail_asset</code>
+            </li>
+            <li>ข้อมูลอะไหล่ที่ใช้: <code>j_jobdetail_spare</code>
+            </li>
+            <li>พิมพ์ service report
+            </li>
+            </ul>
+            <blockquote><p><strong>หมายเหตุ:</strong> กรณีบันทึกข้อมูลผิด ต้องการแก้ไขข้อมูลบางจุด ยังไม่ได้สรุปเงื่อนไขหรือขั้นตอน</p></blockquote>
+            <h3 id="3-4-ระบบ-fixed-asset">3.4 ระบบ Fixed Asset</h3>
+            <p>เป็นระบบจัดเก็บข้อมูลอุปกรณ์ที่ขายให้ลูกค้า หรือที่ซ่อมให้กับลูกค้า</p>
+            <ul>
+            <li>ค้นหา scan barcode / input serial, category, brand, model, สถานะ, ลูกค้า
+            </li>
+            <li>ตรวจสอบสถานะและข้อมูลอุปกรณ์ที่ขายหรือให้บริการ
+            <ul>
+            <li>ข้อมูล: serial no, category, brand, model, warranty expired สำหรับลูกค้า และสำหรับ supplier ในการ claim, เลขที่ใบรับสินค้า (ERP)
+            </li>
+            <li>สถานะของอุปกรณ์: อยู่ในคลัง xxx, ทำ PDI, ติดตั้งที่ลูกค้า xxx, วันที่ติดตั้ง, Invoice (ERP)
+            </li>
+            <li>ประวัติการเคลื่อนย้าย: วันเวลา, รับจาก, ติดตั้งที่, หมายเหตุ
+            </li>
+            </ul>
+            </li>
+            <li>บันทึกการรับ/โอน Fixed asset ที่ยังไม่ได้ติดตั้ง
+            </li>
+            <li>เพิ่ม/แก้ไขข้อมูล Fixed Asset
+            <ul>
+            <li>การรับเข้าใหม่, การทำ PDI
+            </li>
+            <li>import excel
+            </li>
+            <li>กรณีตรวจสอบพบว่าไม่ถูกต้อง สามารถแก้ไขข้อมูลได้ และจัดเก็บรูปถ่ายของอุปกรณ์ได้
+            </li>
+            </ul>
+            </li>
+            </ul>
+            <hr>
+            <p><em>แปลงจาก <code>frontend-sms-spec.txt</code> เป็น Markdown โดยคงเนื้อหาต้นฉบับไว้ครบถ้วน (ไม่มีการเขียนใหม่หรือตัดทอน) — จัดรูปแบบเป็นหัวข้อ/ตาราง/code block เพื่อให้อ่านง่ายขึ้นเท่านั้น</em></p>
+        </article>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2026 Flowco Co., Ltd. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

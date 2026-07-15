@@ -1,0 +1,22 @@
+{
+  "reports": [
+    {
+      "title": "SMS Summary Report",
+      "url": "./sms-frontend-summary-260715.html",
+      "category": "Frontend",
+      "date": "2026-07-15"
+    },
+    {
+      "title": "SMS Analysis & Design",
+      "url": "./sms-frontend-design-260715.html",
+      "category": "Frontend",
+      "date": "2026-07-15"
+    },
+    {
+      "title": "SMS System requirement",
+      "url": "./sms-frontend-spec-260713.html",
+      "category": "Frontend",
+      "date": "2026-07-13"
+    }
+  ]
+}

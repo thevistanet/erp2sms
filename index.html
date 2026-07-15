@@ -202,6 +202,29 @@
             fill: currentColor;
         }
 
+        /* ข้อความสถานะ ตอนกำลังโหลด / ไม่มีข้อมูล / โหลดไม่สำเร็จ */
+        .state-message {
+            background: var(--card-bg);
+            border: 1px dashed #cbd5e1;
+            border-radius: var(--border-radius);
+            padding: 24px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .state-message.is-error {
+            border-color: #fca5a5;
+            border-style: solid;
+            background-color: #fef2f2;
+            color: #b91c1c;
+            text-align: left;
+        }
+
+        .state-message.is-hidden {
+            display: none;
+        }
+
         /* ส่วนท้ายเว็บ (Footer) */
         footer {
             background-color: var(--primary-color);
@@ -251,46 +274,109 @@
             <div class="subtitle">ระบบจัดเก็บรายงานผลการวิเคราะห์และสรุปสถานะระบบฝั่ง Frontend</div>
         </div>
 
-        <ul class="report-grid">
-            <li class="report-card">
-                <div class="report-details">
-                    <div class="meta-tags">
-                        <span class="tag-category">Frontend</span>
-                        <span class="tag-date">
-                            <svg class="icon" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
-                            2026-07-15
-                        </span>
-                    </div>
-                    <a href="./sms-frontend-summary-260715.html" class="report-title-link">SMS Summary Report</a>
-                </div>
-                <a href="./sms-frontend-summary-260715.html" class="btn-action">
-                    <span>ดูรายงาน</span>
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
-                </a>
-            </li>
-
-            <li class="report-card">
-                <div class="report-details">
-                    <div class="meta-tags">
-                        <span class="tag-category">Frontend</span>
-                        <span class="tag-date">
-                            <svg class="icon" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
-                            2026-07-15
-                        </span>
-                    </div>
-                    <a href="./sms-frontend-design-260715.html" class="report-title-link">SMS Analysis Design</a>
-                </div>
-                <a href="./sms-frontend-design-260715.html" class="btn-action">
-                    <span>ดูรายงาน</span>
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
-                </a>
-            </li>
-        </ul>
+        <ul class="report-grid" id="report-grid"></ul>
+        <div class="state-message" id="state-message">กำลังโหลดรายการรายงาน...</div>
     </main>
 
     <footer>
         <p>Copyright &copy; 2026 Flowco Co., Ltd. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        // รายการรายงานทั้งหมดอยู่ใน reports.json — เพิ่ม/แก้ไขรายการได้ที่ไฟล์นั้นไฟล์เดียว
+        const DATA_URL = './reports.json';
+
+        const ICON_CALENDAR = 'M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z';
+        const ICON_ARROW = 'M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z';
+
+        const grid = document.getElementById('report-grid');
+        const stateMessage = document.getElementById('state-message');
+
+        function showState(html, isError) {
+            stateMessage.innerHTML = html;
+            stateMessage.classList.toggle('is-error', Boolean(isError));
+            stateMessage.classList.remove('is-hidden');
+        }
+
+        function svgIcon(path) {
+            return '<svg class="icon" viewBox="0 0 24 24"><path d="' + path + '"/></svg>';
+        }
+
+        function createCard(report) {
+            const card = document.createElement('li');
+            card.className = 'report-card';
+
+            const details = document.createElement('div');
+            details.className = 'report-details';
+
+            const metaTags = document.createElement('div');
+            metaTags.className = 'meta-tags';
+
+            if (report.category) {
+                const category = document.createElement('span');
+                category.className = 'tag-category';
+                category.textContent = report.category;
+                metaTags.appendChild(category);
+            }
+
+            if (report.date) {
+                const date = document.createElement('span');
+                date.className = 'tag-date';
+                date.innerHTML = svgIcon(ICON_CALENDAR);
+                date.append(' ' + report.date);
+                metaTags.appendChild(date);
+            }
+
+            const titleLink = document.createElement('a');
+            titleLink.className = 'report-title-link';
+            titleLink.href = report.url;
+            titleLink.textContent = report.title;
+
+            details.append(metaTags, titleLink);
+
+            const button = document.createElement('a');
+            button.className = 'btn-action';
+            button.href = report.url;
+            button.innerHTML = '<span>ดูรายงาน</span>' + svgIcon(ICON_ARROW);
+
+            card.append(details, button);
+            return card;
+        }
+
+        async function loadReports() {
+            let data;
+            try {
+                const response = await fetch(DATA_URL, { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status + ' ' + response.statusText);
+                }
+                data = await response.json();
+            } catch (error) {
+                const hint = location.protocol === 'file:'
+                    ? 'หน้านี้ถูกเปิดแบบ file:// ซึ่งเบราว์เซอร์จะบล็อกการโหลดไฟล์ JSON กรุณาเปิดผ่าน web server เช่น <code>python3 -m http.server</code> หรือผ่าน GitHub Pages'
+                    : 'ตรวจสอบว่ามีไฟล์ <code>reports.json</code> อยู่ในโฟลเดอร์เดียวกับหน้านี้ และรูปแบบ JSON ถูกต้อง';
+                showState('<strong>โหลดรายการรายงานไม่สำเร็จ</strong><br>' + hint + '<br><small>' + error.message + '</small>', true);
+                return;
+            }
+
+            const reports = Array.isArray(data) ? data : (data.reports || []);
+            const valid = reports.filter(function (report) {
+                return report && report.title && report.url;
+            });
+
+            if (valid.length === 0) {
+                showState('ยังไม่มีรายงานในระบบ เพิ่มรายการได้ที่ไฟล์ <code>reports.json</code>');
+                return;
+            }
+
+            valid.forEach(function (report) {
+                grid.appendChild(createCard(report));
+            });
+            stateMessage.classList.add('is-hidden');
+        }
+
+        loadReports();
+    </script>
 
 </body>
 </html>
