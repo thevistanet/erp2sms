@@ -77,6 +77,18 @@
             letter-spacing: 0.5px;
         }
 
+        .last-updated {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .last-updated.is-hidden {
+            display: none;
+        }
+
         /* ส่วนเนื้อหาหลัก */
         main {
             flex: 1;
@@ -247,6 +259,9 @@
                 gap: 12px;
                 padding: 15px;
             }
+            .last-updated {
+                font-size: 12px;
+            }
             .report-card {
                 flex-direction: column;
                 align-items: flex-start;
@@ -266,6 +281,7 @@
             <div class="logo-text">FLOW<span>CO</span></div>
             <div class="system-badge">ERP 2 SMS SYSTEM</div>
         </div>
+        <div class="last-updated is-hidden" id="last-updated"></div>
     </header>
 
     <main>
@@ -291,6 +307,7 @@
 
         const grid = document.getElementById('report-grid');
         const stateMessage = document.getElementById('state-message');
+        const lastUpdated = document.getElementById('last-updated');
 
         function showState(html, isError) {
             stateMessage.innerHTML = html;
@@ -300,6 +317,14 @@
 
         function svgIcon(path) {
             return '<svg class="icon" viewBox="0 0 24 24"><path d="' + path + '"/></svg>';
+        }
+
+        function showLastUpdated(reports) {
+            const dates = reports.map(function (report) { return report.date; }).filter(Boolean);
+            if (dates.length === 0) return;
+            const latest = dates.reduce(function (a, b) { return b > a ? b : a; });
+            lastUpdated.innerHTML = svgIcon(ICON_CALENDAR) + '<span>อัปเดตล่าสุด: ' + latest + '</span>';
+            lastUpdated.classList.remove('is-hidden');
         }
 
         function createCard(report) {
@@ -373,6 +398,7 @@
                 grid.appendChild(createCard(report));
             });
             stateMessage.classList.add('is-hidden');
+            showLastUpdated(valid);
         }
 
         loadReports();
