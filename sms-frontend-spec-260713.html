@@ -328,7 +328,7 @@
             <h2>สารบัญ</h2>
             <ul>
             <li class="toc-l2"><a href="#1-scope">1. Scope</a></li>
-            <li class="toc-l3"><a href="#1-1-ระบบงานบริการ-ซ่อมอุปกรณ์-หรือระบบงาน">1.1 ระบบงานบริการ/ซ่อมอุปกรณ์ หรือระบบงาน</a></li>
+            <li class="toc-l3"><a href="#1-1-ระบบงานบริการ-ซ่อมอุปกรณ์">1.1 ระบบงานบริการ/ซ่อมอุปกรณ์</a></li>
             <li class="toc-l3"><a href="#1-2-ระบบ-fixed-asset">1.2 ระบบ Fixed Asset</a></li>
             <li class="toc-l2"><a href="#2-target-users">2. Target Users</a></li>
             <li class="toc-l3"><a href="#flowco-employees">Flowco employees</a></li>
@@ -337,14 +337,14 @@
             <li class="toc-l2"><a href="#3-software-function-specification">3. Software Function Specification</a></li>
             <li class="toc-l3"><a href="#3-1-login-เข้าระบบ">3.1 Login เข้าระบบ</a></li>
             <li class="toc-l3"><a href="#3-2-basic-functions">3.2 Basic Functions</a></li>
-            <li class="toc-l3"><a href="#3-3-dashboard">3.3 Dashboard</a></li>
+            <li class="toc-l3"><a href="#3-3-ระบบงานบริการ-ซ่อมอุปกรณ์">3.3 ระบบงานบริการ/ซ่อมอุปกรณ์</a></li>
             <li class="toc-l3"><a href="#3-4-ระบบ-fixed-asset">3.4 ระบบ Fixed Asset</a></li>
             </ul>
             </nav>
             <p>Front-end software application ที่เป็น responsive web หรือ mobile application ซึ่งเป็น sub module ของระบบ VistaERP2 สำหรับบริหารงานรับแจ้งปัญหาและซ่อมสำหรับธุรกิจจำหน่ายและติดตั้งอุปกรณ์ตู้จ่าย, หัวจ่าย, เครื่องวัดถังน้ำมัน และระบบ fuel retail system ให้กับสถานีน้ำมัน</p>
             <hr>
             <h2 id="1-scope">1. Scope</h2>
-            <h3 id="1-1-ระบบงานบริการ-ซ่อมอุปกรณ์-หรือระบบงาน">1.1 ระบบงานบริการ/ซ่อมอุปกรณ์ หรือระบบงาน</h3>
+            <h3 id="1-1-ระบบงานบริการ-ซ่อมอุปกรณ์">1.1 ระบบงานบริการ/ซ่อมอุปกรณ์</h3>
             <p>จากลูกค้า หรือภายในบริษัทเอง เช่น แจ้งซ่อม, ปัญหาการอุปกรณ์ หรือการใช้งานระบบ ที่เป็นสินค้าของบริษัท รวมทั้งงานซ่อมอุปกรณ์ภายในบริษัทเอง โดยประกอบไปด้วย</p>
             <h4 id="outstanding-job-monitor">Outstanding job monitor</h4>
             <p>แสดงข้อมูลงานบริการ/ซ่อมที่ยังไม่ปิด ตามสิทธิ์ (Role) ของ user login</p>
@@ -520,8 +520,9 @@
             <li>Security: pin code, bio (mobile)
             </li>
             </ul>
-            <h3 id="3-3-dashboard">3.3 Dashboard</h3>
-            <h4 id="user-login-status">User login status</h4>
+            <h3 id="3-3-ระบบงานบริการ-ซ่อมอุปกรณ์">3.3 ระบบงานบริการ/ซ่อมอุปกรณ์</h3>
+            <h4 id="3-3-1-dashboard">3.3.1 Dashboard</h4>
+            <h5 id="user-login-status">User login status</h5>
             <ul>
             <li>แสดง login name
             </li>
@@ -536,7 +537,7 @@
             <li>button: <strong>end Milage</strong> — กรณีจบงานที่กำลังทำงานอยู่ (อาจจะค้างงานไว้พรุ่งนี้หรือปิดงานก็ได้) หรือจบงานอื่นๆ เช่น ไปไปรษณีย์
             </li>
             </ul>
-            <h4 id="outstanding-job-monitoring">Outstanding job monitoring</h4>
+            <h5 id="outstanding-job-monitor-2">Outstanding job monitor</h5>
             <ul>
             <li><strong>รับแจ้งบริการ/ซ่อม (new job)</strong> — สำหรับผู้ใช้ที่มีสิทธิ์ในการรับแจ้งซ่อม เช่น Role: call center (CDC)
             </li>
@@ -672,7 +673,7 @@
             <li>click/tab รายการ job → change page to edit outstanding job
             </li>
             </ul>
-            <h4 id="รับแจ้งบริการ-ซ่อม-new-job">รับแจ้งบริการ/ซ่อม (new job)</h4>
+            <h4 id="3-3-2-รับแจ้งบริการ-ซ่อม-new-job">3.3.2 รับแจ้งบริการ/ซ่อม (new job)</h4>
             <p>ขั้นตอนการรับแจ้งและเปิด job (ticket) ในการรับแจ้งโดยฝ่าย call center เป็นผู้เปิด job โดยจะสอบถามรายละเอียด ผู้แจ้ง (ลูกค้า, พนักงานภายใน), รายละเอียดอุปกรณ์, ปัญหาที่พบ</p>
             <p>โดยจะทำการค้นหาข้อมูลลูกค้า สัญญา ถ้ามี รวมทั้งประวัติการรับแจ้ง อุปกรณ์ที่ติดตั้งที่ลูกค้า (Fixed Asset) เพื่อทำการตรวจสอบความถูกต้อง ทั้งในเรื่องการรับประกัน และตรวจสอบว่ามีการเปิดงานซ้ำซ้อนหรือไม่ และช่าง (พนักงานบริการ) ที่รับผิดชอบ ว่างหรือไม่ ในกรณีเปิดงานซ่อมภายใน ก็จะระบุรหัสอุปกรณ์ที่ซ่อมด้วย</p>
             <p>กรณีเป็น job PM (maintenance ประจำปี) ก็สามารถ copy job รายละเอียดเหมือนกัน แต่เปลี่ยนลูกค้า (สถานี) และผู้รับผิดชอบ พร้อมกันได้หลายสถานี</p>
@@ -830,7 +831,7 @@
             <li>ทำการบันทึก job ใหม่ โดยใช้รายละเอียด job ต้นฉบับ แค่เปลี่ยนสถานี, บริษัทน้ำมัน, และผู้รับผิดชอบ
             </li>
             </ul>
-            <h4 id="การบันทึกงานบริการ-ซ่อมที่ยังไม่ปิด-edit-outstanding-job-2">การบันทึกงานบริการ/ซ่อมที่ยังไม่ปิด (edit outstanding job)</h4>
+            <h4 id="3-3-3-การบันทึกงานบริการ-ซ่อมที่ยังไม่ปิด-edit-outstanding-job">3.3.3 การบันทึกงานบริการ/ซ่อมที่ยังไม่ปิด (edit outstanding job)</h4>
             <p>เมื่อมีการเลือกรายการจากหน้า Dashboard ระบบจะแสดงข้อมูลดังนี้</p>
             <p><strong>ข้อมูลรับแจ้งบริการ/ซ่อม</strong></p>
             <p>ผู้มีสิทธิ์แก้ไขเป็นผู้ใช้ที่มี Role: call center (CDC) ข้อมูลที่ไม่สามารถแก้ไขได้ คือ เลขที่ job, วันเวลาเปิด, ผู้รับแจ้ง, etc</p>
@@ -963,7 +964,7 @@
             </li>
             </ul>
             <p>ยืนยันการปิดงาน "งานค้าง", "ปิดงาน"</p>
-            <h4 id="query-job-ที่ปิดงานแล้ว-แก้ไขไม่ได้-2">query job ที่ปิดงานแล้ว (แก้ไขไม่ได้)</h4>
+            <h4 id="3-3-4-query-job-ที่ปิดแล้ว-แก้ไขไม่ได้">3.3.4 Query job ที่ปิดแล้ว (แก้ไขไม่ได้)</h4>
             <p>ค้นหา job no, company, ผู้รับผิดชอบ, ผู้รับแจ้ง, วันเวลาเปิด job, วันเวลาปิด job, สถานี, บริษัทน้ำมัน, ประเภทสัญญา, การชำระ เป็นต้น</p>
             <p>แสดงข้อมูลเหมือนกับ monitor:</p>
             <ul>
@@ -1007,8 +1008,6 @@
             </ul>
             </li>
             </ul>
-            <hr>
-            <p><em>แปลงจาก <code>frontend-sms-spec.txt</code> เป็น Markdown โดยคงเนื้อหาต้นฉบับไว้ครบถ้วน (ไม่มีการเขียนใหม่หรือตัดทอน) — จัดรูปแบบเป็นหัวข้อ/ตาราง/code block เพื่อให้อ่านง่ายขึ้นเท่านั้น</em></p>
         </article>
     </main>
 
